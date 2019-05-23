@@ -1,68 +1,57 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Introduction
 
-## Available Scripts
+As Merinio forays into the regulated world of unionized military installations, one of our potential customers has requested that we add a war situation simulator to our software. In the spirit of learning React, we have decided to host an internal RFP (Request for proposal) to provide them with the ideal solution.
 
-In the project directory, you can run:
+They have specifically asked for a minefield simulator, not unlike the original minesweeper that could be found on every PC in existence. Being a governement entity, they have a long list of requirements and have even included some bonus features that would improve our standing.
 
-### `npm start`
+# Requirements
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In order to be considered in the RFP, your software must have at least the list of basic requirements, but would be better off with all the advanced requirements. It must also conform to the stringent IT requirements of the National Defence, otherwise they will block the project on grounds that it threatens national security.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Basic Requirements
 
-### `npm test`
+A recruit must be:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- able to see how many bombs remain.
+- able to see how much time they have taken to locate all the bombs.
+- able to reset the simulation at any time, losing all progress.
+- able to click on a location to reveal it's contents.
+- warned if they have clicked on a bomb, this ends the game unless bomb defusal has been be developed.
+- informed of the number of adjacent bombs there are on a revealed cell, if there are no adjacent bombs, you can indicate this in the way you see fit.
 
-### `npm run build`
+### Advanced Requirements
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A recruit must be:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- able to flag locations as suspected bomb sites.
+- able to set the level of difficulty.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The game must:
 
-### `npm run eject`
+- be able to expand the clicked location to make sure all unrevealed locations are surrounded by numbers.
+- Automatically flag all locations once there are as many unrevealed locations as there are bombs.
+- Show the classic smiley at the top of the window.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### IT Requirements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Due to internal security requirements, this application must:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- use the latest version of React.
+- use Node.js if a server is required.
+- use the latest version of redux for state management.
+- run on the latest version of chrome.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Bonus
 
-## Learn More
+- Be able to defuse a bomb if you click on one by accident, this should be accompanied by a skill test.
+- Be able to change the colors of the interface.
+- Be able to set a custom map size and number of bombs.
+- make a noise when a bomb explodes.
+- Add an extreme difficulty where it is possible to have multiple bombs per location.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Extreme Bonus (requires a back end)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Add a log in system
+- Add a score board with monthly, yearly and all time high scores.
+- Add a training system that shows probability of there being a bomb in a location.
+- Add a timed competitive mode that works like chess game timers and has both players on identical maps.
