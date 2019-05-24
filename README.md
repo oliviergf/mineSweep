@@ -70,3 +70,7 @@ If you have an amazing score in one category, it can cancel out another.
 - Beauty/Originality of the interface
 - Balance of the difficulty slope
 - Intuitiveness of the interface
+
+# How to run
+
+To run this, run `cd client/ && yarn && cd .. && cd server/ && yarn && cd ..`, after in two separate tabs `cd client/ && yarn start` and `cd server && node index.js`. If that doesn't work, I don't know what you did wrong.
