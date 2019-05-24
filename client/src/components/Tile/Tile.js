@@ -10,6 +10,12 @@ const Tile = props => {
     setTileState(props.currentState.state)
   }
 
+  if (props.currentState.state === 'reveiled') {
+    //ajust its state with the new props
+    setTileContent(props.currentState.content)
+    setTileState(props.currentState.state)
+  }
+
   const [tileState, setTileState] = useState(props.currentState.state)
   const [tileContent, setTileContent] = useState(props.currentState.content)
 

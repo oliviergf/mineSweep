@@ -8,7 +8,7 @@ function Row(props) {
   let content = (
     <div className="Row">
       {row.map((tileState, tileIndex) => {
-        return <Tile currentState={tileState} position={[props.rowIndex, tileIndex]} tileFunc={props.tileFunc} />
+        return <Tile key={tileIndex} currentState={tileState} position={[props.rowIndex, tileIndex]} tileFunc={props.tileFunc} />
       })}
       <br />
     </div>
