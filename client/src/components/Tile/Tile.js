@@ -1,32 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-const Tile = props => {
-  let callGameFunction = () => {
-    //calls the func in game component
-    props.tileFunc(props.position[0], props.position[1])
-
-    //ajust its state with the new props
-    setTileContent(props.currentState.content)
-    setTileState(props.currentState.state)
-  }
-
-  if (props.currentState.state === 'reveiled') {
-    //ajust its state with the new props
-    setTileContent(props.currentState.content)
-    setTileState(props.currentState.state)
-  }
-
-  const [tileState, setTileState] = useState(props.currentState.state)
-  const [tileContent, setTileContent] = useState(props.currentState.content)
-
-  let content = (
-    //props.position = [i,j]
-    <div className={tileState} onClick={callGameFunction}>
-      {tileState === 'revealed' ? tileContent : ':)'}
-    </div>
-  )
-
-  return content
-}
+const Tile = props => (
+  <div className={props.currentState.state} onClick={() => props.tileFunc(props.position[0], props.position[1])}>
+    {props.currentState.state === 'revealed' ? props.currentState.content : ':)'}
+  </div>
+)
 
 export default Tile

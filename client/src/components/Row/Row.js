@@ -4,7 +4,6 @@ import Tile from '../Tile/Tile'
 
 function Row(props) {
   let row = props.rowInstance
-
   let content = (
     <div className="Row">
       {row.map((tileState, tileIndex) => {

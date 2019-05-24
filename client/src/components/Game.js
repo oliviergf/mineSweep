@@ -1,70 +1,72 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Board from './Board/Board'
 import { generateBoard, traverseReveal } from '../assets/scripts/scripts'
 import Button from './Button/Button'
+import _ from 'lodash'
 
-function Game() {
-  //menu to select size of map
-  /* 
-  {
-    state: flag, hidden, revealed 
-    content: '1-8', 'B', ''
+class Game extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      gameInstance: generateBoard(parseInt(props.size), parseInt(props.size), 0.5),
+      gameFailed: false,
+      gameSize: parseInt(props.size)
+    }
   }
-  */
-
-  // const [theTime, setTheTime] = useState(0)
-  const [gameSize, setGameSize] = useState(5)
-  let size = gameSize
-  const [gameFailed, setGameFailed] = useState(false)
-  const [gameInstance, setGameInstance] = useState(generateBoard(size, size, 0.9))
-
-  const clickedOnTile = (i, j) => {
-    gameInstance[i][j].state = 'revealed'
-
-    if (gameInstance[i][j].content === '') {
-      traverseReveal(gameInstance, i, j)
+  clickedOnTile = (i, j) => {
+    const instance = _.cloneDeep(this.state.gameInstance)
+    instance[i][j].state = 'revealed'
+    if (instance[i][j].content === '') {
+      traverseReveal(instance, i, j)
     }
-    if (gameInstance[i][j].content === 'B') {
-      setGameFailed(true)
+    if (instance[i][j].content === 'B') {
+      this.setState({ gameFailed: true })
     }
 
-    console.log('gameInstance after click')
-    console.log(gameInstance)
-    setGameInstance(gameInstance)
+    this.setState({ gameInstance: instance })
+    console.log(this.state.gameInstance)
   }
 
   //this shoud trigged a new game
-  const resetGame = () => {
-    setGameFailed(false)
+  resetGame = () => {
+    this.setState((prevState, prevProps) => ({ gameFailed: false, gameInstance: generateBoard(prevState.gameSize, prevState.gameSize, 0.5) }))
   }
 
-  let content = (
-    <div className="Game">
-      <br />
-      {gameFailed ? <div>you just failed this shit dawg</div> : ''}
-      <div>
-        <Board gameInstance={gameInstance} tileFunc={clickedOnTile} isDead={gameFailed} />
-      </div>
-      <div>
-        Select the size of the game!
-        <select
-          onChange={event => {
-            console.log(event.target.value)
-            // setGameSize(event.target.value)
-          }}
-        >
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-      </div>
-      {gameFailed ? <Button name={'restart the game'} clickFn={() => resetGame()} /> : ''}
-    </div>
-  )
+  continueGame = () => {
+    this.setState({ gameFailed: false })
+  }
 
-  return content
+  render() {
+    let content = (
+      <div className="Game">
+        <br />
+        {this.state.gameFailed ? <div>you just failed this</div> : ''}
+        <div>
+          <Board gameInstance={this.state.gameInstance} tileFunc={this.clickedOnTile.bind(this)} isDead={this.state.gameFailed} />
+        </div>
+        <div>
+          Select the size of the game!
+          <select
+            onChange={event => {
+              this.setState({ gameSize: event.target.value })
+              this.resetGame()
+              event.preventDefault()
+            }}
+          >
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
+        </div>
+        <Button name={'reset the game'} clickFn={() => this.resetGame()} />
+        {this.state.gameFailed ? <Button name={'continue the game'} clickFn={() => this.continueGame()} /> : ''}
+      </div>
+    )
+
+    return content
+  }
 }
 
 export default Game
