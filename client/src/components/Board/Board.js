@@ -3,15 +3,12 @@ import React, { useState, useEffect } from 'react'
 import Row from '../Row/Row'
 
 function Board(props) {
+  console.log('board props:')
+  console.log(props)
   let content = (
     <div className="Board">
       {props.gameInstance.map((row, rowIndex) => {
-        return (
-          <div>
-            <Row rowInstance={row} rowIndex={rowIndex} tileFunc={props.tileFunc} />
-            <br />
-          </div>
-        )
+        return <Row rowInstance={row} rowIndex={rowIndex} tileFunc={props.tileFunc} />
       })}
     </div>
   )

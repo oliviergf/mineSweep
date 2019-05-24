@@ -27,7 +27,7 @@ function App() {
         <div>
           <Button name={'Damn Button'} clickFn={() => setPlay(true)} />
         </div>
-        {menu} hello
+        {menu}
       </header>
     </div>
   )
