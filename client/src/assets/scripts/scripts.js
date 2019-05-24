@@ -9,7 +9,7 @@ export function generateBoard(x, y) {
     .fill()
     .map(generateRow)
 
-  const mineNum = parseInt(x * y * 0.1)
+  const mineNum = parseInt(x * y * 0.3)
   const minedBoard = generateMines(board, mineNum)
   const numberedMinedBoard = generateNumberTiles(minedBoard)
   return numberedMinedBoard
@@ -92,32 +92,34 @@ export function traverseReveal(board, x, y) {
   while (toTraverseArr.length) {
     const tileCoord = toTraverseArr.shift()
     board[tileCoord.y][tileCoord.x].state = 'revealed'
-    const newEmptyHiddenNeighbors = getEmptyHiddenNeighbors(board, tileCoord.x, tileCoord.y)
-    toTraverseArr.push(...newEmptyHiddenNeighbors)
+    if (board[tileCoord.y][tileCoord.x].content === '') {
+      const newEmptyHiddenNeighbors = getEmptyHiddenNeighbors(board, tileCoord.x, tileCoord.y)
+      toTraverseArr.push(...newEmptyHiddenNeighbors)
+    }
   }
 }
 
 function getEmptyHiddenNeighbors(board, x, y) {
   const emptyHiddenNeighbors = []
   // Top
-  if (board[y - 1] && board[y - 1][x] && board[y - 1][x].content === '' && board[y - 1][x].state === 'hidden') emptyHiddenNeighbors.push({ x, y: y - 1 })
+  if (board[y - 1] && board[y - 1][x] && board[y - 1][x].content !== 'B' && board[y - 1][x].state === 'hidden') emptyHiddenNeighbors.push({ x, y: y - 1 })
   // Top Right
-  if (board[y - 1] && board[y - 1][x + 1] && board[y - 1][x + 1].content === '' && board[y - 1][x + 1].state === 'hidden')
+  if (board[y - 1] && board[y - 1][x + 1] && board[y - 1][x + 1].content !== 'B' && board[y - 1][x + 1].state === 'hidden')
     emptyHiddenNeighbors.push({ x: x + 1, y: y - 1 })
   // Right
-  if (board[y] && board[y][x + 1] && board[y][x + 1].content === '' && board[y][x + 1].state === 'hidden') emptyHiddenNeighbors.push({ x: x + 1, y })
+  if (board[y] && board[y][x + 1] && board[y][x + 1].content !== 'B' && board[y][x + 1].state === 'hidden') emptyHiddenNeighbors.push({ x: x + 1, y })
   // Bottom Right
-  if (board[y + 1] && board[y + 1][x + 1] && board[y + 1][x + 1].content === '' && board[y + 1][x + 1].state === 'hidden')
+  if (board[y + 1] && board[y + 1][x + 1] && board[y + 1][x + 1].content !== 'B' && board[y + 1][x + 1].state === 'hidden')
     emptyHiddenNeighbors.push({ x: x + 1, y: y + 1 })
   // Bottom
-  if (board[y + 1] && board[y + 1][x] && board[y + 1][x].content === '' && board[y + 1][x].state === 'hidden') emptyHiddenNeighbors.push({ x, y: y + 1 })
+  if (board[y + 1] && board[y + 1][x] && board[y + 1][x].content !== 'B' && board[y + 1][x].state === 'hidden') emptyHiddenNeighbors.push({ x, y: y + 1 })
   // Bottom Left
-  if (board[y + 1] && board[y + 1][x - 1] && board[y + 1][x - 1].content === '' && board[y + 1][x - 1].state === 'hidden')
+  if (board[y + 1] && board[y + 1][x - 1] && board[y + 1][x - 1].content !== 'B' && board[y + 1][x - 1].state === 'hidden')
     emptyHiddenNeighbors.push({ x: x - 1, y: y + 1 })
   // Left
-  if (board[y] && board[y][x - 1] && board[y][x - 1].content === '' && board[y][x - 1].state === 'hidden') emptyHiddenNeighbors.push({ x: x - 1, y })
+  if (board[y] && board[y][x - 1] && board[y][x - 1].content !== 'B' && board[y][x - 1].state === 'hidden') emptyHiddenNeighbors.push({ x: x - 1, y })
   // Top Left
-  if (board[y - 1] && board[y - 1][x - 1] && board[y - 1][x - 1].content === '' && board[y - 1][x - 1].state === 'hidden')
+  if (board[y - 1] && board[y - 1][x - 1] && board[y - 1][x - 1].content !== 'B' && board[y - 1][x - 1].state === 'hidden')
     emptyHiddenNeighbors.push({ x: x - 1, y: y - 1 })
   return emptyHiddenNeighbors
 }

@@ -24,13 +24,22 @@ class Game extends React.Component {
     }
 
     this.setState({ gameInstance: instance })
-    console.log(this.state.gameInstance)
   }
 
   //this shoud trigged a new game
   resetGame = () => {
     this.setState((prevState, prevProps) => ({ gameFailed: false, gameInstance: generateBoard(prevState.gameSize, prevState.gameSize, 0.5) }))
   }
+
+  // showMap = () => {
+  //   const instance = _.cloneDeep(this.state.gameInstance)
+  //   for (let i = 0; i < instance.length; i++) {
+  //     for (let j = 0; j < instance[0].length; i++) {
+  //       instance[i][j].state = 'revealed'
+  //     }
+  //   }
+  //   this.setState({ gameInstance: instance })
+  // }
 
   continueGame = () => {
     this.setState({ gameFailed: false })
@@ -48,10 +57,12 @@ class Game extends React.Component {
           Select the size of the game!
           <select
             onChange={event => {
-              this.setState({ gameSize: event.target.value })
+              this.setState({ gameSize: parseInt(event.target.value) })
               this.resetGame()
               event.preventDefault()
+              event.stopPropagation()
             }}
+            value={this.state.gameSize}
           >
             <option value="5">5</option>
             <option value="6">6</option>
@@ -61,6 +72,7 @@ class Game extends React.Component {
           </select>
         </div>
         <Button name={'reset the game'} clickFn={() => this.resetGame()} />
+        {/* <Button name={'show all the map'} clickFn={() => this.showMap()} /> */}
         {this.state.gameFailed ? <Button name={'continue the game'} clickFn={() => this.continueGame()} /> : ''}
       </div>
     )
