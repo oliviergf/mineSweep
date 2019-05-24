@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
-import Tile from './Tile/Tile'
+import Board from './Board/Board'
 
 function Game() {
-  const [boardTiles, setBoardTiles] = useState('this is a boardt iles')
+  //menu to select size of map
+  let initialGameInstance = [[0, 0, 0, 5, 0], [0, 0, 0, 0, 0], [0, 0, 0, 7, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]] //initial 5x5 game
 
-  // // Load the message only when the component mounts
-  // useEffect(() => {
-  //   getMessage()
-  // }, [])
+  const [gameSize, setGameSize] = useState(5)
+  const [gameInstance, setGameInstance] = useState([])
 
-  // async function setBoardTiles(i) {
-  //   const response = await axios.get('/api')
-  //   setMessage(response.data)
-  // }
+  const tileMessaging = (i, j) => {
+    console.log('comming from Game! ')
+    console.log(i)
+    console.log(j)
+  }
 
   let content = (
     <div className="Game">
-      This is a game 'instance' where we need to have the state of the entire board!!
+      This is a game 'instance' where we need to have the state of the entire board !!
       <br />
-      {boardTiles}
       <div>
-        <Tile />
+        <Board gameInstance={initialGameInstance} tileFunc={tileMessaging} />
+      </div>
+      <div>
+        Select the size of the game!
+        <select onChange={event => setGameSize(event.target.value)}>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+        </select>
       </div>
     </div>
   )

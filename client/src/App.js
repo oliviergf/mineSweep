@@ -19,8 +19,6 @@ function App() {
   //   setMessage(response.data)
   // }
 
-  console.log(play)
-
   let menu = play ? <Game /> : <div>...</div>
   return (
     <div className="App">
