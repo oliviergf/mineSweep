@@ -39,7 +39,6 @@ Due to internal security requirements, this application must:
 
 - use the latest version of React.
 - use Node.js if a server is required.
-- use the latest version of redux for at least some state management.
 - run on the latest version of chrome.
 - have no game breaking bugs.
 
